@@ -7,15 +7,17 @@ def main(raw_input):
         total_fuel += module_fuel
 
     return str(total_fuel)
-        
+
 
 def get_input(filename):
     with open(filename) as f:
         puzzle_input = f.read()
     return puzzle_input
 
+
 def parse_input(raw_input):
     return raw_input.split('\n')
 
-raw_input = get_input('input.txt')
-print(main(raw_input))
+
+puzzle_input = get_input('input.txt')
+print(main(puzzle_input))
