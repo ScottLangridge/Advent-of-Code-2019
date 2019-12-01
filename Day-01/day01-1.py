@@ -11,8 +11,8 @@ def main(raw_input):
 
 def get_input(filename):
     with open(filename) as f:
-        puzzle_input = f.read()
-    return puzzle_input
+        raw_input = f.read()
+    return raw_input
 
 
 def parse_input(raw_input):
