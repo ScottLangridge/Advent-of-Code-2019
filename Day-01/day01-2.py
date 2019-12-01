@@ -26,5 +26,6 @@ def parse_input(raw_input):
     return raw_input.split('\n')
 
 
-puzzle_input = get_input('input.txt')
-print(main(puzzle_input))
+if __name__ == '__main__':
+    puzzle_input = get_input('input.txt')
+    print(main(puzzle_input))
