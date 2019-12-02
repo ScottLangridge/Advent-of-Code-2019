@@ -13,7 +13,7 @@ def main(raw_input):
         elif data[pos] == 2:
             data[data[pos + 3]] = data[data[pos + 1]] * data[data[pos + 2]]
         pos += 4
-
+        
     return str(data[0])
 
 
@@ -28,5 +28,5 @@ def parse_input(raw_input):
 
 
 if __name__ == '__main__':
-    puzzle_input = get_input('test1.txt')
+    puzzle_input = get_input('input.txt')
     print(main(puzzle_input))
