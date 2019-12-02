@@ -35,5 +35,5 @@ def parse_input(raw_input):
 
 
 if __name__ == '__main__':
-    puzzle_input = get_input('input.txt')
+    puzzle_input = get_input('../input.txt')
     print(main(puzzle_input))
