@@ -5,38 +5,19 @@ def main(raw_input):
         for verb in range(100):
             if run_machine(data[:], noun, verb) == 19690720:
                 return (100 * noun) + verb
-    
+
 
 def run_machine(data, noun, verb):
     data[1] = noun
     data[2] = verb
 
-    # print('\n\n', data)
-
     pos = 0
-    operand = data[0]
+    while data[pos] != 99:
 
-    while operand != 99:
-        operand = data[pos]
-        param1_addr = data[pos + 1]
-        param2_addr = data[pos + 2]
-        param1_val = data[param1_addr]
-        param2_val = data[param2_addr]
-        out_addr = data[pos + 3]
-
-        # print('PC:', pos)
-        # print('Operand:', data[pos])
-        # print('Param Addrs:', data[pos + 1], data[pos + 2])
-        # print('Param Vals:', data[data[pos + 1]], data[data[pos + 2]])
-        # print('Dest:', data[pos + 3])
-        # print()
-
-        if operand == 1:
-            data[out_addr] = param1_val + param2_val
-        elif operand == 2:
-            data[out_addr] = param1_val * param2_val
-        else:
-            pass
+        if data[pos] == 1:
+            data[data[pos + 3]] = data[data[pos + 1]] + data[data[pos + 2]]
+        elif data[pos] == 2:
+            data[data[pos + 3]] = data[data[pos + 1]] * data[data[pos + 2]]
 
         pos += 4
 
