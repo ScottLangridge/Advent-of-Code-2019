@@ -1,4 +1,4 @@
-from riscy import RISCy
+from riscy_mk1 import RISCy
 
 
 def main(raw_input):
