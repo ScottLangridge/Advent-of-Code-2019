@@ -32,8 +32,14 @@ class RISCy:
     def set_input_queue(self, inputs):
         self._input_queue = inputs
 
+    def queue_input(self, val):
+        self._input_queue.append(val)
+
     def get_io_log(self):
         return self._io_log
+
+    def halted(self):
+        return self._halt_flag
 
     def run(self):
         self._pc = 0
