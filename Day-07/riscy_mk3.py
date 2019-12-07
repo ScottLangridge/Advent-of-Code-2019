@@ -1,13 +1,17 @@
 class RISCy:
-    def __init__(self):
+    def __init__(self, pause_on_output=False):
         # Registers
-        self._pc = None
+        self._pc = 0
         self._memory = []
         self._input_queue = []
         self._io_log = []
 
+        # Configuration
+        self._pause_on_output = pause_on_output
+
         # Flags
-        self._halt_flag = None
+        self._halt_flag = False
+        self._pause_flag = False
 
         # Instructions
         self._instruction_set = {
@@ -41,11 +45,11 @@ class RISCy:
     def halted(self):
         return self._halt_flag
 
-    def run(self):
-        self._pc = 0
-        self._halt_flag = False
+    def reset_pause_flag(self):
+        self._pause_flag = False
 
-        while not self._halt_flag:
+    def run(self):
+        while not (self._halt_flag or self._pause_flag):
             opcode, addressing_modes = self._process_instruction(self._memory[self._pc])
             first_operand = self._pc + 1
             last_operand = self._pc + self._instruction_set[opcode]['len']
@@ -90,6 +94,8 @@ class RISCy:
         val = str(self._eval_operand(operands[0]))
         self._io_log.append(val)
         print('Output: ' + val)
+        if self._pause_on_output:
+            self._pause_flag = True
 
     def _jump_if_true(self, operands):
         if self._eval_operand(operands[0]) != 0:
@@ -107,5 +113,5 @@ class RISCy:
         val = int(self._eval_operand(operands[0]) == self._eval_operand(operands[1]))
         self._memory[operands[2][0]] = val
 
-    def _halt(self, operands):
+    def _halt(self, operands=None):
         self._halt_flag = True

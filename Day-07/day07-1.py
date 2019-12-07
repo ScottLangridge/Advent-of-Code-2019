@@ -1,6 +1,6 @@
 from itertools import permutations
 
-from riscy_mk2 import RISCy
+from riscy_mk3 import RISCy
 
 
 def main(raw_input):

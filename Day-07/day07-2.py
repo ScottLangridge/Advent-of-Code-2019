@@ -1,5 +1,4 @@
 from itertools import permutations
-import asyncio
 
 from riscy_mk3 import RISCy
 
@@ -13,7 +12,7 @@ def main(raw_input):
         # Configure amps
         amps = []
         for i in range(5):
-            new_amp = RISCy()
+            new_amp = RISCy(pause_on_output=True)
             new_amp.set_memory(data)
             new_amp.queue_input(config[i])
             amps.append(new_amp)
@@ -24,6 +23,7 @@ def main(raw_input):
         while not all_halted(amps):
             amps[current_amp].queue_input(next_input)
             amps[current_amp].run()
+            amps[current_amp].reset_pause_flag()
             next_input = amps[current_amp].get_io_log()[-1]
             current_amp = (current_amp + 1) % 5
 
