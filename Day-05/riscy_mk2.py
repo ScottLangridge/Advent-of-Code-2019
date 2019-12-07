@@ -15,7 +15,11 @@ class RISCy:
             1: {'len': 4, 'function': self._add},
             2: {'len': 4, 'function': self._mult},
             3: {'len': 2, 'function': self._input},
-            4: {'len': 2, 'function': self._output}
+            4: {'len': 2, 'function': self._output},
+            5: {'len': 3, 'function': self._jump_if_true},
+            6: {'len': 3, 'function': self._jump_if_false},
+            7: {'len': 4, 'function': self._less_than},
+            8: {'len': 4, 'function': self._equals}
         }
 
     def set_memory(self, data):
@@ -80,6 +84,22 @@ class RISCy:
         val = str(self._eval_operand(operands[0]))
         self._io_log.append(val)
         print('Output: ' + val)
+
+    def _jump_if_true(self, operands):
+        if self._eval_operand(operands[0]) != 0:
+            self._pc = self._eval_operand(operands[1]) - self._instruction_set[5]['len']
+
+    def _jump_if_false(self, operands):
+        if self._eval_operand(operands[0]) == 0:
+            self._pc = self._eval_operand(operands[1]) - self._instruction_set[6]['len']
+
+    def _less_than(self, operands):
+        val = int(self._eval_operand(operands[0]) < self._eval_operand(operands[1]))
+        self._memory[operands[2][0]] = val
+
+    def _equals(self, operands):
+        val = int(self._eval_operand(operands[0]) == self._eval_operand(operands[1]))
+        self._memory[operands[2][0]] = val
 
     def _halt(self, operands):
         self._halt_flag = True

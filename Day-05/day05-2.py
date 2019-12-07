@@ -1,10 +1,14 @@
+from riscy_mk2 import RISCy
+
+
 def main(raw_input):
-    # Parse input
+    riscy = RISCy()
+    data = [int(x) for x in parse_input(raw_input)]
+    riscy.set_memory(data)
+    riscy.set_input_queue([5])
 
-    # Solve problem
-
-    # Return solution
-    return None
+    riscy.run()
+    return riscy.get_io_log()[-1]
 
 
 def get_input(filename):
@@ -14,7 +18,7 @@ def get_input(filename):
 
 
 def parse_input(raw_input):
-    return raw_input
+    return raw_input.split(',')
 
 
 if __name__ == '__main__':
