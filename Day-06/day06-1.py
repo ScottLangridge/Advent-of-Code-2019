@@ -1,10 +1,23 @@
+from collections import defaultdict
+
+
 def main(raw_input):
-    # Parse input
+    data = parse_input(raw_input)
 
-    # Solve problem
+    orbits = defaultdict(list)
+    for (k, v) in data:
+        orbits[k].append(v)
+    orbits = dict(orbits)
 
-    # Return solution
-    return None
+    return count_orbits(orbits, 'COM', 0)
+
+
+def count_orbits(orbits, k, count):
+    if k not in orbits.keys():
+        return count
+    else:
+        directs = orbits[k]
+        return count + sum([count_orbits(orbits, i, count + 1) for i in directs])
 
 
 def get_input(filename):
@@ -14,7 +27,7 @@ def get_input(filename):
 
 
 def parse_input(raw_input):
-    return raw_input
+    return [line.split(')') for line in raw_input.splitlines()]
 
 
 if __name__ == '__main__':
