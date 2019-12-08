@@ -19,6 +19,7 @@ def main(raw_input):
         final_layer[i] = get_visible(final_layer[i])
 
     pretty_print_layer(dimensions, final_layer)
+    return ''.join([str(i) for i in final_layer])
 
 
 def get_visible(pix_stack):
