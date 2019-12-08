@@ -2,7 +2,7 @@ from itertools import permutations
 
 
 class RISCy:
-    def __init__(self, pause_on_output=False):
+    def __init__(self, print_output=False, pause_on_output=False):
         # Registers
         self._pc = 0
         self._memory = []
@@ -11,6 +11,7 @@ class RISCy:
 
         # Configuration
         self._pause_on_output = pause_on_output
+        self.print_output = print_output
 
         # Flags
         self._halt_flag = False
@@ -96,7 +97,8 @@ class RISCy:
     def _output(self, operands):
         val = str(self._eval_operand(operands[0]))
         self._io_log.append(val)
-        print('Output: ' + val)
+        if self.print_output:
+            print('Output: ' + val)
         if self._pause_on_output:
             self._pause_flag = True
 
