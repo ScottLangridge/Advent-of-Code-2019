@@ -83,7 +83,7 @@ class RISCy:
     def _output(self, operands):
         val = str(self._eval_operand(operands[0]))
         self._io_log.append(val)
-        print('Output: ' + val)
+        # print('Output: ' + val)
 
     def _jump_if_true(self, operands):
         if self._eval_operand(operands[0]) != 0:
